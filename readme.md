@@ -33,3 +33,5 @@ See instructions for each of the components of the application.
 ## Understanding the Spring Petclinic application with a few diagrams
 <a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
 
+Application Architecture: 
+![PetClinic Application Architecture](https://github.com/adamquan/spring-petclinic/blob/master/images/architecture.png)
