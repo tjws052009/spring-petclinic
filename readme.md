@@ -34,4 +34,4 @@ See instructions for each of the components of the application.
 <a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
 
 Application Architecture: 
-![PetClinic Application Architecture](https://github.com/adamquan/spring-petclinic/blob/master/images/architecture.png width="555" height="610")
+![PetClinic Application Architecture](https://github.com/adamquan/spring-petclinic/blob/master/images/architecture.png)
