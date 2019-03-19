@@ -227,6 +227,13 @@ export MAVEN_CMD_LINE_ARGS
 WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain
 
 exec "$JAVACMD" \
+	-javaagent:./agents/elastic-apm-agent-1.4.0.jar \
+  -Delastic.apm.service_name=spring-petclinic \
+  -Delastic.apm.service_version=1.0.0 \
+  -Delastic.apm.server_urls=https://5fea15b641064bfa800ef7591069c865.apm.us-central1.gcp.cloud.es.io:443 \
+  -Delastic.apm.secret_token=92g2WYrFpnY0TappU7 \
+  -Delastic.apm.verify_server_cert=false \
+  -Delastic.apm.ignore_urls=/health,/metrics*,/jolokia \
   $MAVEN_OPTS \
   -classpath "$MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.jar" \
   "-Dmaven.home=${M2_HOME}" "-Dmaven.multiModuleProjectDirectory=${MAVEN_PROJECTBASEDIR}" \
