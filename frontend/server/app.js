@@ -102,25 +102,35 @@ function captureErrorBody(proxyResData) {
   }
 }
 
+// Starts a custom transaction
+function startAPMTransaction( transactionName, req) {
+  apm.setTransactionName(transactionName)
+  let user = getUserDetails(req);
+  apm.setUserContext({
+    'username': user[0],
+    'email': user[1]
+  });
+}
+
+// Capture an error
+function apmCaptureError ( proxyRes, proxyResData, userReq ) {
+  let err = getError(proxyRes, proxyResData);
+  apm.captureError(err, {
+    request: userReq,
+    response: proxyRes,
+    custom: captureErrorBody(proxyResData)
+  });
+}
+
 app.use('/api/find_state', proxy(settings.address_server, {
     preserveHostHdr: true,
     proxyReqPathResolver: function (req) {
-      apm.setTransactionName('/api/find_state')
-      let user = getUserDetails(req);
-      apm.setUserContext({
-        'username': user[0],
-        'email': user[1]
-      });
+      startAPMTransaction( '/api/find_state', req );
       return '/api/find_state'
     },
     userResDecorator: function(proxyRes, proxyResData, userReq, userRes) {
       if (proxyRes.statusCode >= 400) {
-          let err = getError(proxyRes, proxyResData);
-          apm.captureError(err, {
-            request: userReq,
-            response: proxyRes,
-            custom: captureErrorBody(proxyResData)
-          });
+        apmCaptureError( proxyRes, proxyResData, userReq );
       }
       return proxyResData
     }
@@ -129,22 +139,12 @@ app.use('/api/find_state', proxy(settings.address_server, {
 app.use('/api/find_city', proxy(settings.address_server, {
     preserveHostHdr: true,
     proxyReqPathResolver: function (req) {
-      apm.setTransactionName('/api/find_city')
-      let user = getUserDetails(req);
-      apm.setUserContext({
-        'username': user[0],
-        'email': user[1]
-      });
+      startAPMTransaction('/api/find_city', req);
       return '/api/find_city'
     },
     userResDecorator: function(proxyRes, proxyResData, userReq, userRes) {
       if (proxyRes.statusCode >= 400) {
-          let err = getError(proxyRes, proxyResData);
-          apm.captureError(err, {
-            request: userReq,
-            response: proxyRes,
-            custom: captureErrorBody(proxyResData)
-          });
+        apmCaptureError( proxyRes, proxyResData, userReq );
       }
       return proxyResData
     }
@@ -153,22 +153,12 @@ app.use('/api/find_city', proxy(settings.address_server, {
 app.use('/api/find_address', proxy(settings.address_server, {
     preserveHostHdr: true,
     proxyReqPathResolver: function (req) {
-      apm.setTransactionName('/api/find_address')
-      let user = getUserDetails(req);
-      apm.setUserContext({
-        'username': user[0],
-        'email': user[1]
-      });
+      startAPMTransaction('/api/find_address', req);
       return '/api/find_address'
     },
     userResDecorator: function(proxyRes, proxyResData, userReq, userRes) {
       if (proxyRes.statusCode >= 400) {
-          let err = getError(proxyRes, proxyResData);
-          apm.captureError(err, {
-            request: userReq,
-            response: proxyRes,
-            custom: captureErrorBody(proxyResData)
-          });
+        apmCaptureError( proxyRes, proxyResData, userReq );
       }
       return proxyResData
     }
@@ -178,22 +168,12 @@ app.use('/api/find_address', proxy(settings.address_server, {
 app.use('/api', proxy(settings.api_server, {
     preserveHostHdr: true,
     proxyReqPathResolver: function (req) {
-      apm.setTransactionName('/api/'+req.url.split('/').filter(c => c != '').slice(0,1)[0])
-      let user = getUserDetails(req);
-      apm.setUserContext({
-        'username': user[0],
-        'email': user[1]
-      });
+      startAPMTransaction('/api/'+req.url.split('/').filter(c => c != '').slice(0,1)[0], req);
       return settings.api_prefix+req.url
     },
     userResDecorator: function(proxyRes, proxyResData, userReq, userRes) {
       if (proxyRes.statusCode >= 400) {
-          let err = getError(proxyRes, proxyResData);
-          apm.captureError(err, {
-            request: userReq,
-            response: proxyRes,
-            custom: captureErrorBody(proxyResData)
-          });
+        apmCaptureError( proxyRes, proxyResData, userReq );
       }
       return proxyResData
     }
