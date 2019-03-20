@@ -1,5 +1,12 @@
 # Spring PetClinic Application with the Elastic Stack
 
+The PetClinic application contains a few componets (See architecture diagram at the bottom for detais):
+
+- The React frontend web application
+- The node.js Express application acting as a proxy for the React web application.
+- The Spring Boot backend application.
+- The Python application for address lookup from an Elasticsearch cluster.
+
 A docker compose allows the user to run the application, backed with Mysql as the data layer, with Elastic APM and Beat instrumentation enabled. The following services are deployed:
 
 - Pet Clinic via embedded Tomcat with REST API. Instrument with Elastic Java Agent.
@@ -7,28 +14,48 @@ A docker compose allows the user to run the application, backed with Mysql as th
 - Elasticsearch
 - Kibana
 - MySQL
-- Packetbeat - **PENDING**
-- Metricbeat - **PENDING**
-- Filebeat - **PENDING**
-- Nginx - **PENDING**
-
-This allows collection of the following metrics:
-
-- Java APM data as available from the Java Agent i.e. transactions, spans and errors
-- MYSQL, HTTP traffic via Packetbeat **PENDING**
-- Application Logs + NGINX Logs via Filebeat **PENDING**
-- JMX, Docker, Mysql, Nginx metrics via Metricbeat  **PENDING**
 
 ## Running Petclinic with the Elastic Stack
 
 `ES_VERSION=6.4.2 docker-compose -f docker-compose.yml up`
 
-Other versions of the Elasticstack may work. Currently, only version 6.4.2 has been tested.
-
 ## Running petclinic locally for development
 
 See instructions for each of the components of the application.
 
+- Start the Spring Boot backend
+
+```
+	git clone https://github.com/adamquan/spring-petclinic.git
+	cd spring-petclinic
+	./mvnw spring-boot:run
+```
+
+- Start the Python address finder
+
+```
+	cd spring-petclinic/address_resolver/src
+	pip install gunicorn json-logging-py
+	pip install --no-cache-dir -r requirements.txt
+	gunicorn --config gunicorn.conf --log-config logging.conf -b :5000 server:app
+```
+
+- Start the node.js proxy application
+
+```
+	cd spring-petclinic/frontend/server
+	npm install
+	npm start
+```
+
+- Start the React frontend
+
+```
+	git clone https://github.com/adamquan/spring-petclinic.git
+	cd spring-petclinic/frontend/client
+	npm install
+	npm start
+```
 
 ## Understanding the Spring Petclinic application with a few diagrams
 <a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
