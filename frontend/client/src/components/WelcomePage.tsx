@@ -1,10 +1,11 @@
 import * as React from 'react';
+import { APMService, punish } from '../main';
 export default class WelcomePage extends React.Component<any, any> {
 
   constructor() {
     super();
   }
-  
+
   componentWillMount() {
     APMService.getInstance().startTransaction('WelcomePage');
     punish();
@@ -17,7 +18,7 @@ export default class WelcomePage extends React.Component<any, any> {
   componentWillUnmount() {
     APMService.getInstance().endTransaction(false);
   }
-  
+
   render() {
     return (
       <span>
