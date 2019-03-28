@@ -4,9 +4,9 @@ import os
 class Config(object):
     # Elasticsearch information. This is the cluster used to store address data.
     # Replace the URL, user and password information with these of your cluster.
-    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL','https://624eff0b7be7446a9c60f993d57b19ca.us-central1.gcp.cloud.es.io:9243')
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL','localhost:9200')
     ELASTICSEARCH_USER = os.getenv('ELASTICSEARCH_USER','elastic')
-    ELASTICSEARCH_PASSWORD = os.getenv('ELASTICSEARCH_PASSWORD', '5UbC2kOJiC8jy8ATejDMzpHK')
+    ELASTICSEARCH_PASSWORD = os.getenv('ELASTICSEARCH_PASSWORD', 'changeme')
 
     ELASTICSEARCH_VALIDATE_CERTS = os.getenv('ELASTICSEARCH_VALIDATE_CERTS', 'true')
     ADDRESSES_PER_PAGE=int(os.getenv('ADDRESSES_PER_PAGE','25'))
@@ -15,9 +15,9 @@ class Config(object):
         # Elastic APM server information. This is where your agents will send APM data.
         # Replace the URL and token with these of your APM server.
         'SERVICE_NAME': os.getenv('ELASTIC_APM_SERVICE_NAME','address-finder'),
-        'SERVER_URL': os.getenv('ELASTIC_APM_SERVER_URL','https://5fea15b641064bfa800ef7591069c865.apm.us-central1.gcp.cloud.es.io:443'),
-        'SECRET_TOKEN': '92g2WYrFpnY0TappU7',
-        'SERVICE_VERSION': os.getenv('ELASTIC_APM_SERVER_URL','1.0'),
+        'SERVER_URL': os.getenv('ELASTIC_APM_SERVER_URL','http://localhost:8200'),
+        'SECRET_TOKEN': os.getenv('ELASTIC_APM_SECRET_TOKEN', ''),
+        'SERVICE_VERSION': os.getenv('ELASTIC_APM_SERVICE_VERSION','1.0'),
         'COLLECT_LOCAL_VARIABLES': os.getenv('ELASTIC_APM_COLLECT_LOCAL_VARIABLES','all'),
         'SOURCE_LINES_ERROR_APP_FRAMES': os.getenv('ELASTIC_APM_SOURCE_LINES_ERROR_APP_FRAMES','10'),
         'SOURCE_LINES_ERROR_LIBRARY_FRAMES': os.getenv('ELASTIC_APM_SOURCE_LINES_ERROR_LIBRARY_FRAMES','10'),

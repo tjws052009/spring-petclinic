@@ -1,9 +1,8 @@
 var config = {
   // Replace ELASTIC_APM_SERVER_URL, ELASTIC_APM_SERVER_JS_URL and apm_server_token
   // with these of your APM server.
-  apm_server: process.env.ELASTIC_APM_SERVER_URL || 'https://5fea15b641064bfa800ef7591069c865.apm.us-central1.gcp.cloud.es.io:443',
-  apm_server_js: process.env.ELASTIC_APM_SERVER_JS_URL || 'https://5fea15b641064bfa800ef7591069c865.apm.us-central1.gcp.cloud.es.io:443',
-  apm_server_token: '92g2WYrFpnY0TappU7',
+  apm_server: process.env.ELASTIC_APM_SERVER_URL || 'http://localhost:8200',
+  apm_server_token: process.env.ELASTIC_APM_SECRET_TOKEN || '',
   apm_service_name: process.env.ELASTIC_APM_SERVICE_NAME || 'petclinic-node',
   apm_client_service_name: process.env.ELASTIC_APM_CLIENT_SERVICE_NAME || 'petclinic-react',
   apm_service_version: process.env.ELASTIC_APM_SERVICE_VERSION || '1.0.0',

@@ -230,8 +230,8 @@ exec "$JAVACMD" \
 	-javaagent:./agents/elastic-apm-agent-1.4.0.jar \
   -Delastic.apm.service_name=spring-petclinic \
   -Delastic.apm.service_version=1.0.0 \
-  -Delastic.apm.server_urls=https://5fea15b641064bfa800ef7591069c865.apm.us-central1.gcp.cloud.es.io:443 \
-  -Delastic.apm.secret_token=92g2WYrFpnY0TappU7 \
+  -Delastic.apm.server_urls=$ELASTIC_APM_SERVER_URL \
+  -Delastic.apm.secret_token=$ELASTIC_APM_SECRET_TOKEN \
   -Delastic.apm.verify_server_cert=false \
   -Delastic.apm.ignore_urls=/health,/metrics*,/jolokia \
   $MAVEN_OPTS \
