@@ -30,7 +30,7 @@ export class APMService {
             const config = JSON.parse(xhr.responseText);
             this.apm = initApm({
                serviceName: config.apm_client_service_name,
-               serverUrl: config.apm_server_js,
+               serverUrl: config.apm_server,
                serviceVersion: config.apm_service_version,
                transactionThrottleLimit: 1000,
                errorThrottleLimit: 1000,

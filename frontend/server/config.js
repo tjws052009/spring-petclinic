@@ -1,5 +1,5 @@
 var config = {
-  // Replace ELASTIC_APM_SERVER_URL, ELASTIC_APM_SERVER_JS_URL and apm_server_token
+  // Replace ELASTIC_APM_SERVER_URL and apm_server_token
   // with these of your APM server.
   apm_server: process.env.ELASTIC_APM_SERVER_URL || 'http://localhost:8200',
   apm_server_token: process.env.ELASTIC_APM_SECRET_TOKEN || '',
