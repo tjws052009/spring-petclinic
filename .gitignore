@@ -16,3 +16,6 @@ springboot-petclinic-server/
 **/.venv*
 **/__pycache__*
 **__pycache__**
+# Ignore npm package-lock files in frontend
+frontend/**/package-lock.json
+bin/setAPMenv-*.sh
