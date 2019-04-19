@@ -1,3 +1,5 @@
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
 # This is your APM server URL
 export ELASTIC_APM_SERVER_URL=
 
