@@ -21,7 +21,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-// import co.elastic.apm.api.CaptureSpan;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.OpenSessionInViewFilter;
@@ -71,7 +70,6 @@ public class JpaOwnerRepositoryImpl implements OwnerRepository {
         return (Owner) query.getSingleResult();
     }
 
-    // @CaptureSpan(value = "save")
     @Override
     public void save(Owner owner) {
         if (owner.getId() == null) {
