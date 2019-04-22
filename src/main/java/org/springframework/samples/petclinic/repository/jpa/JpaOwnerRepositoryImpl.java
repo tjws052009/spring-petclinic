@@ -28,6 +28,8 @@ import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.repository.OwnerRepository;
 import org.springframework.stereotype.Repository;
 
+import co.elastic.apm.api.CaptureSpan;
+
 /**
  * JPA implementation of the {@link OwnerRepository} interface.
  *
@@ -81,7 +83,8 @@ public class JpaOwnerRepositoryImpl implements OwnerRepository {
     }
     
 	@SuppressWarnings("unchecked")
-	@Override
+    @Override
+    @CaptureSpan(value = "Find all owners in Class JpaOwnerRepositoryImpl")
 	public Collection<Owner> findAll() throws DataAccessException {
 		Query query = this.em.createQuery("SELECT owner FROM Owner owner");
         return query.getResultList();

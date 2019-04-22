@@ -38,6 +38,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import co.elastic.apm.api.CaptureSpan;
+import co.elastic.apm.api.ElasticApm;
+import co.elastic.apm.api.Span;
+
 /**
  * @author Vitaliy Fedoriv
  *
@@ -64,6 +68,7 @@ public class OwnerRestController {
 		return new ResponseEntity<Collection<Owner>>(owners, HttpStatus.OK);
 	}
 
+	@CaptureSpan(value = "Get All Owners")
     @PreAuthorize( "hasRole(@roles.OWNER_ADMIN)" )
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Collection<Owner>> getOwners() {
@@ -74,14 +79,19 @@ public class OwnerRestController {
 		return new ResponseEntity<Collection<Owner>>(owners, HttpStatus.OK);
 	}
 
+	@CaptureSpan(value = "Find Owner By Owner ID")
     @PreAuthorize( "hasRole(@roles.OWNER_ADMIN)" )
 	@RequestMapping(value = "/{ownerId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Owner> getOwner(@PathVariable("ownerId") int ownerId) {
+		Span span = ElasticApm.currentSpan();
+		span.addLabel("OwnerID", ownerId);
 		Owner owner = null;
 		owner = this.clinicService.findOwnerById(ownerId);
 		if (owner == null) {
 			return new ResponseEntity<Owner>(HttpStatus.NOT_FOUND);
 		}
+		span.addLabel("LastName", owner.getLastName());
+		span.addLabel("FirstName", owner.getFirstName());
 		return new ResponseEntity<Owner>(owner, HttpStatus.OK);
 	}
 
