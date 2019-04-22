@@ -21,13 +21,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import co.elastic.apm.api.CaptureSpan;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.OpenSessionInViewFilter;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.repository.OwnerRepository;
 import org.springframework.stereotype.Repository;
+
+import co.elastic.apm.api.CaptureSpan;
 
 /**
  * JPA implementation of the {@link OwnerRepository} interface.
@@ -71,7 +72,6 @@ public class JpaOwnerRepositoryImpl implements OwnerRepository {
         return (Owner) query.getSingleResult();
     }
 
-    @CaptureSpan(value = "save")
     @Override
     public void save(Owner owner) {
         if (owner.getId() == null) {
@@ -83,7 +83,8 @@ public class JpaOwnerRepositoryImpl implements OwnerRepository {
     }
     
 	@SuppressWarnings("unchecked")
-	@Override
+    @Override
+    @CaptureSpan(value = "Find all owners in Class JpaOwnerRepositoryImpl")
 	public Collection<Owner> findAll() throws DataAccessException {
 		Query query = this.em.createQuery("SELECT owner FROM Owner owner");
         return query.getResultList();

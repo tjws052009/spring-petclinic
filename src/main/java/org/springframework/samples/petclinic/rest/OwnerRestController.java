@@ -21,7 +21,6 @@ import java.util.Collection;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-import co.elastic.apm.api.CaptureSpan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -38,8 +37,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import co.elastic.apm.api.CaptureSpan;
 import co.elastic.apm.api.ElasticApm;
-import co.elastic.apm.api.Transaction;
+import co.elastic.apm.api.Span;
 
 /**
  * @author Vitaliy Fedoriv
@@ -67,6 +68,7 @@ public class OwnerRestController {
 		return new ResponseEntity<Collection<Owner>>(owners, HttpStatus.OK);
 	}
 
+	@CaptureSpan(value = "Get All Owners")
     @PreAuthorize( "hasRole(@roles.OWNER_ADMIN)" )
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Collection<Owner>> getOwners() {
@@ -77,23 +79,26 @@ public class OwnerRestController {
 		return new ResponseEntity<Collection<Owner>>(owners, HttpStatus.OK);
 	}
 
+	@CaptureSpan(value = "Find Owner By Owner ID")
     @PreAuthorize( "hasRole(@roles.OWNER_ADMIN)" )
 	@RequestMapping(value = "/{ownerId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Owner> getOwner(@PathVariable("ownerId") int ownerId) {
+		Span span = ElasticApm.currentSpan();
+		span.addLabel("OwnerID", ownerId);
 		Owner owner = null;
 		owner = this.clinicService.findOwnerById(ownerId);
 		if (owner == null) {
 			return new ResponseEntity<Owner>(HttpStatus.NOT_FOUND);
 		}
+		span.addLabel("LastName", owner.getLastName());
+		span.addLabel("FirstName", owner.getFirstName());
 		return new ResponseEntity<Owner>(owner, HttpStatus.OK);
 	}
 
-	@CaptureSpan(value = "addOwner")
     @PreAuthorize( "hasRole(@roles.OWNER_ADMIN)" )
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Owner> addOwner(@RequestBody @Valid Owner owner, BindingResult bindingResult,
 			UriComponentsBuilder ucBuilder) {
-        Transaction transaction = ElasticApm.currentTransaction();
 		BindingErrorsResponse errors = new BindingErrorsResponse();
 		HttpHeaders headers = new HttpHeaders();
 		if (bindingResult.hasErrors() || (owner == null)) {
@@ -106,7 +111,6 @@ public class OwnerRestController {
 		return new ResponseEntity<Owner>(owner, headers, HttpStatus.CREATED);
 	}
 
-    @CaptureSpan(value = "updateOwner")
     @PreAuthorize( "hasRole(@roles.OWNER_ADMIN)" )
 	@RequestMapping(value = "/{ownerId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Owner> updateOwner(@PathVariable("ownerId") int ownerId, @RequestBody @Valid Owner owner,

@@ -1,13 +1,13 @@
 package org.springframework.samples.petclinic.validation;
 
-import co.elastic.apm.api.CaptureSpan;
-import co.elastic.apm.api.ElasticApm;
-import co.elastic.apm.api.Transaction;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import co.elastic.apm.api.CaptureSpan;
+import co.elastic.apm.api.ElasticApm;
+import co.elastic.apm.api.Transaction;
 
 public class ZipCodeValidator implements ConstraintValidator<ZipCodeConstraint,String> {
 
@@ -24,10 +24,10 @@ public class ZipCodeValidator implements ConstraintValidator<ZipCodeConstraint,S
     public boolean isValid(String value, ConstraintValidatorContext context) {
         Matcher matcher = zipPattern.matcher(value);
         boolean match =  matcher.find();
-        if (!match){
+        if(!match) {
             Transaction transaction = ElasticApm.currentTransaction();
-            if (transaction != null){
-                transaction.captureException(new IllegalArgumentException(String.format("%s is invalid zip code",value)));
+            if(transaction != null) {
+                transaction.captureException(new IllegalArgumentException(String.format("%s is invalid zip code", value)));
             }
         }
         return match;
