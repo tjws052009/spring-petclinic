@@ -22,7 +22,7 @@ def handle_data_file(file_path, index):
         for row in reader:
             doc = dict(row)
             doc['_index'] = index
-            doc['_type'] = "doc"
+#            doc['_type'] = "doc"
             doc = {k: v for k, v in doc.items() if v is not None and v != ""}
             yield doc
 
