@@ -2,14 +2,15 @@ import csv
 import json, os, sys, argparse, time
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import parallel_bulk
+import os
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--file', dest='file', required=True)
+parser.add_argument('--file', dest='file', required=True, default='../sample.csv')
 parser.add_argument('--index', dest='index', required=False, default='address')
 parser.add_argument('--use_ssl', dest='use_ssl', action='store_true', default=False)
-parser.add_argument('--es_host', dest='es_host', required=True)
+parser.add_argument('--es_host', dest='es_host', required=False, default=os.environ['ELASTICSEARCH_URL'])
 parser.add_argument('--es_user', dest='es_user', required=False, default='elastic')
-parser.add_argument('--es_password', dest='es_password', required=False, default='changeme')
+parser.add_argument('--es_password', dest='es_password', required=False, default=os.environ['ELASTICSEARCH_PASSWORD'])
 parser.add_argument('--thread_count', dest='thread_count', required=False, default=8, type=int)
 parser.add_argument('--chunk_size', dest='chunk_size', required=False, default=1000, type=int)
 parser.add_argument('--timeout', dest='timeout', required=False, default=120,type=int)
