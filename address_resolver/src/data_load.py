@@ -5,7 +5,7 @@ from elasticsearch.helpers import parallel_bulk
 import os
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--file', dest='file', required=True, default='../sample.csv')
+parser.add_argument('--file', dest='file', required=False, default='../sample.csv')
 parser.add_argument('--index', dest='index', required=False, default='address')
 parser.add_argument('--use_ssl', dest='use_ssl', action='store_true', default=False)
 parser.add_argument('--es_host', dest='es_host', required=False, default=os.environ['ELASTICSEARCH_URL'])
