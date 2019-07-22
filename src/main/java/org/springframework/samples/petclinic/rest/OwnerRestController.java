@@ -42,6 +42,9 @@ import co.elastic.apm.api.CaptureSpan;
 import co.elastic.apm.api.ElasticApm;
 import co.elastic.apm.api.Span;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author Vitaliy Fedoriv
  *
@@ -51,6 +54,8 @@ import co.elastic.apm.api.Span;
 @CrossOrigin(exposedHeaders = "errors, content-type")
 @RequestMapping("/api/owners")
 public class OwnerRestController {
+
+	Logger logger = LoggerFactory.getLogger(OwnerRestController.class);
 
 	@Autowired
 	private ClinicService clinicService;
@@ -73,6 +78,9 @@ public class OwnerRestController {
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Collection<Owner>> getOwners() {
 		Collection<Owner> owners = this.clinicService.findAllOwners();
+
+		logger.info( owners.size() + " owners retrieved!");
+		
 		if (owners.isEmpty()) {
 			return new ResponseEntity<Collection<Owner>>(HttpStatus.NOT_FOUND);
 		}
