@@ -23,6 +23,8 @@ A docker compose allows the user to run the application, backed with Mysql as th
 
 See instructions for each of the components of the application.
 
+First of all, set your Elasticsearch cluster information inside the script `bin/setAPMenv.sh` and run the script. All the components rely on the environment variables to connect to your Elasticsearch cluster.
+
 - Start the Spring Boot backend
 
 ```
