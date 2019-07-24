@@ -37,6 +37,7 @@ See instructions for each of the components of the application.
 	cd spring-petclinic/address_resolver/src
 	pip install gunicorn json-logging-py
 	pip install --no-cache-dir -r requirements.txt
+        python data_load.py
 	gunicorn --config gunicorn.conf --log-config logging.conf -b :5000 server:app
 ```
 
@@ -51,7 +52,6 @@ See instructions for each of the components of the application.
 - Start the React frontend
 
 ```
-	git clone https://github.com/adamquan/spring-petclinic.git
 	cd spring-petclinic/frontend/client
 	npm install
 	npm start
