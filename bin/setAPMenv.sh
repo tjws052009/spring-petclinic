@@ -13,5 +13,6 @@ export ELASTICSEARCH_URL=
 # This is your Elassticsearch password for user "elastic" 
 export ELASTICSEARCH_PASSWORD=
 
-
+# This is your Elasticsearch JAVA APM Version
+export ELASTIC_APM_AGENT_VERSION=1.16.0
 
