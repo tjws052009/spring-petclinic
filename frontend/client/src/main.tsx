@@ -48,10 +48,10 @@ export class APMService {
               };
               return payload;
             });
-            this.apm.setUserContext({
+/*             this.apm.setUserContext({
                 'username': config.user.username,
                 'email': config.user.email
-            });
+            }); */
             APMService.instance.ready = true;
         } else {
           console.log('Failed to Initialize APM');
