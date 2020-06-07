@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import { init as initApm } from '@elastic/apm-rum'
+import { init as initApm } from '@elastic/apm-rum';
 
 import { browserHistory as history } from 'react-router';
 
