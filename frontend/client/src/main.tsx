@@ -92,7 +92,7 @@ export class APMService {
   endTransaction(completed) {
     if (APMService.instance.open) {
       APMService.instance.open = false;
-      APMService.instance.apm.addLables({'success_load': completed.toString()});
+      APMService.instance.apm.addLabels({'success_load': completed.toString()});
       console.log('Closing transaction');
       let transaction = APMService.instance.apm.getCurrentTransaction();
       transaction.end();
