@@ -23,6 +23,7 @@ export class APMService {
   private setup_apm() {
       const requestUrl = url('config');
       const xhr = new XMLHttpRequest();
+
       xhr.open('GET', requestUrl, true);
       xhr.onload = function(e) {
         if (xhr.status === 200) {
@@ -33,9 +34,10 @@ export class APMService {
                serviceVersion: config.apm_service_version,
                transactionThrottleLimit: 1000,
                errorThrottleLimit: 1000,
-               distributedTracingOrigins: config.distributedTracingOrigins.split(',')
+               distributedTracingOrigins: config.distributedTracingOrigins.split(','),
+               pageLoadTransactionName: window.location.pathname !== '' ? window.location.pathname : 'homepage'
             });
-            this.apm.setInitialPageLoadName(window.location.pathname !== '' ? window.location.pathname : 'homepage');
+            // this.apm.setInitialPageLoadName(window.location.pathname !== '' ? window.location.pathname : 'homepage');
             this.apm.addFilter(function (payload) {
               if (payload.transactions) {
                 payload.transactions.filter(function (tr) {
