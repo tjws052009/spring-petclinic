@@ -31,9 +31,9 @@ export class APMService {
                serviceName: config.apm_client_service_name,
                serverUrl: config.apm_server,
                serviceVersion: config.apm_service_version,
-               // transactionThrottleLimit: 1000,
-               // errorThrottleLimit: 1000,
-               // distributedTracingOrigins: config.distributedTracingOrigins.split(',')
+               transactionThrottleLimit: 1000,
+               errorThrottleLimit: 1000,
+               distributedTracingOrigins: config.distributedTracingOrigins.split(',')
             });
             this.apm.setInitialPageLoadName(window.location.pathname !== '' ? window.location.pathname : 'homepage');
             this.apm.addFilter(function (payload) {
@@ -83,7 +83,7 @@ export class APMService {
         APMService.instance.apm.getCurrentTransaction().end();
       }
       let transaction = APMService.instance.apm.startTransaction(name, 'Events');
-      APMService.instance.apm.addTags({'success_load': 'false'});
+      APMService.instance.apm.addLabels({'success_load': 'false'});
       console.log(transaction);
       APMService.instance.open = true;
     }
@@ -92,7 +92,7 @@ export class APMService {
   endTransaction(completed) {
     if (APMService.instance.open) {
       APMService.instance.open = false;
-      APMService.instance.apm.addTags({'success_load': completed.toString()});
+      APMService.instance.apm.addLables({'success_load': completed.toString()});
       console.log('Closing transaction');
       let transaction = APMService.instance.apm.getCurrentTransaction();
       transaction.end();
