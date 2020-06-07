@@ -1,10 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { init as initApm } from '@elastic/apm-rum'
 
 import { browserHistory as history } from 'react-router';
-
-const initApm = require('elastic-apm-js-base/src/index').init;
 
 require('./styles/less/petclinic.less');
 import { url } from './util/index';
@@ -32,9 +31,9 @@ export class APMService {
                serviceName: config.apm_client_service_name,
                serverUrl: config.apm_server,
                serviceVersion: config.apm_service_version,
-               transactionThrottleLimit: 1000,
-               errorThrottleLimit: 1000,
-               distributedTracingOrigins: config.distributedTracingOrigins.split(',')
+               // transactionThrottleLimit: 1000,
+               // errorThrottleLimit: 1000,
+               // distributedTracingOrigins: config.distributedTracingOrigins.split(',')
             });
             this.apm.setInitialPageLoadName(window.location.pathname !== '' ? window.location.pathname : 'homepage');
             this.apm.addFilter(function (payload) {
