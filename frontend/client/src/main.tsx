@@ -32,12 +32,11 @@ export class APMService {
                serviceName: config.apm_client_service_name,
                serverUrl: config.apm_server,
                serviceVersion: config.apm_service_version,
-               transactionThrottleLimit: 1000,
-               errorThrottleLimit: 1000,
-               distributedTracingOrigins: config.distributedTracingOrigins.split(','),
-               pageLoadTransactionName: 'homepage'
+               // transactionThrottleLimit: 1000,
+               // errorThrottleLimit: 1000,
+               // distributedTracingOrigins: config.distributedTracingOrigins.split(',')
             });
-            // this.apm.setInitialPageLoadName(window.location.pathname !== '' ? window.location.pathname : 'homepage');
+            this.apm.setInitialPageLoadName(window.location.pathname !== '' ? window.location.pathname : 'homepage');
             this.apm.addFilter(function (payload) {
               if (payload.transactions) {
                 payload.transactions.filter(function (tr) {
