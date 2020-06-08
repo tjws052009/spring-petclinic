@@ -32,6 +32,7 @@ export class APMService {
                serviceName: config.apm_client_service_name,
                serverUrl: config.apm_server,
                serviceVersion: config.apm_service_version,
+               logLevel: 'debug'
                // transactionThrottleLimit: 1000,
                // errorThrottleLimit: 1000,
                // distributedTracingOrigins: config.distributedTracingOrigins.split(',')
@@ -48,10 +49,10 @@ export class APMService {
               };
               return payload;
             });
-/*             this.apm.setUserContext({
+            this.apm.setUserContext({
                 'username': config.user.username,
                 'email': config.user.email
-            }); */
+            });
             APMService.instance.ready = true;
         } else {
           console.log('Failed to Initialize APM');
