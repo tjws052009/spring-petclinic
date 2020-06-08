@@ -1,5 +1,5 @@
 import * as React from 'react';
-const Autosuggest = require('react-autosuggest');
+import { Autosuggest } from 'react-autosuggest';
 import { url } from '../../util/index';
 import { IConstraint, IError, IInputFetchHandler, IInputValueHandler } from '../../types/index';
 
@@ -24,6 +24,9 @@ interface IAutocompleteState {
 };
 
 export default class AutocompleteInput extends React.Component<IAutocompleteProps, IAutocompleteState> {
+  [x: string]: any;
+  state: { suggestions: any[]; };
+  props: any;
 
   constructor(props) {
     super(props);
@@ -32,11 +35,11 @@ export default class AutocompleteInput extends React.Component<IAutocompleteProp
     };
   }
 
-  getSuggestionValue(suggestion) {
+  getSuggestionValue(suggestion: any) {
     return suggestion;
   }
 
-  renderSuggestion(suggestion) {
+  renderSuggestion(suggestion: React.ReactNode) {
     return (
       <span>{suggestion}</span>
     );
@@ -57,7 +60,7 @@ export default class AutocompleteInput extends React.Component<IAutocompleteProp
     });
   };
 
-  onChange = (event, { newValue, method }) => {
+  onChange = (event: any, { newValue, method }: any) => {
     this.props.onChange(newValue);
   };
 

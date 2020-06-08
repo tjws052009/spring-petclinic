@@ -1,6 +1,4 @@
 import * as React from 'react';
-
-import { IRouter, Link } from 'react-router';
 import { url, submitForm, xhr_submitForm } from '../../util/index';
 import { APMService, punish } from '../../main';
 import Input from '../form/Input';
@@ -21,6 +19,7 @@ interface IPetEditorState {
 };
 
 export default class PetEditor extends React.Component<IPetEditorProps, IPetEditorState> {
+  [x: string]: any;
 
   context: IRouterContext;
 

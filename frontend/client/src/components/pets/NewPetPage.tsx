@@ -14,9 +14,9 @@ interface INewPetPageProps {
 }
 
 interface INewPetPageState {
-  pet?: IEditablePet;
-  owner?: IOwner;
-  pettypes?: ISelectOption[];
+  pet: IEditablePet;
+  owner: IOwner;
+  pettypes: ISelectOption[];
 };
 
 const NEW_PET: IEditablePet = {
@@ -34,8 +34,8 @@ export default class NewPetPage extends React.Component<INewPetPageProps, INewPe
 
   initial_render: boolean;
 
-  constructor() {
-    super();
+  constructor(props: INewPetPageProps, state: INewPetPageState) {
+    super(props, state);
     this.initial_render = true;
     APMService.getInstance().startTransaction('NewPetPage');
     punish();

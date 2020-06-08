@@ -14,6 +14,11 @@ interface IEditOwnerPageState {
 }
 
 export default class EditOwnerPage extends React.Component<IEditOwnerPageProps, IEditOwnerPageState> {
+  [x: string]: any;
+
+
+  state: any;
+  props: { params: any; };
 
   constructor(props) {
     super(props);

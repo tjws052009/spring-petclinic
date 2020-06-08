@@ -23,6 +23,7 @@ interface IOwnerEditorState {
 };
 
 export default class OwnerEditor extends React.Component<IOwnerEditorProps, IOwnerEditorState> {
+  [x: string]: any;
 
   context: IRouterContext;
   initial_render: boolean;
@@ -31,6 +32,7 @@ export default class OwnerEditor extends React.Component<IOwnerEditorProps, IOwn
   static contextTypes = {
     router: React.PropTypes.object.isRequired
   };
+  state: { owner: any; states: { value: string; name: string; }[]; cities: { value: string; name: string; }[]; addresses: any[]; loading?: boolean; error?: IError };
 
   constructor(props) {
     super(props);

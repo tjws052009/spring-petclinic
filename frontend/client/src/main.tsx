@@ -1,3 +1,4 @@
+// React and Hot Loader
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -76,7 +77,16 @@ export class APMService {
     return APMService.instance;
   }
 
+  /* 
+  Arguments:
 
+  name - The name of the span (string). Defaults to unnamed
+  type - The type of span (string). Defaults to custom
+  options - The following options are supported:
+  
+  parentId - Parent id associated with the new span. Defaults to current transaction id
+  sync - Denotes if the span is blocking (sync) or non-blocking(async). 
+  */
   startTransaction(name) {
     if (APMService.instance.ready && !APMService.instance.open) {
       console.log('Starting transaction - ' + name + ':');
@@ -91,6 +101,7 @@ export class APMService {
     }
   }
 
+  // Ends the transaction. If the transaction has already ended, nothing happens.
   endTransaction(completed) {
     if (APMService.instance.open) {
       APMService.instance.open = false;

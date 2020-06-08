@@ -9,8 +9,8 @@ interface IErrorPageState {
 }
 
 export default class ErrorPage extends React.Component<void, IErrorPageState> {
-  constructor() {
-    super();
+  constructor(props: void, state: IErrorPageState) {
+    super(props, state);
     this.state = {};
   }
 

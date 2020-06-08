@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { IOwner, IPet, IPetType, IVisit, IError, IRouterContext } from '../../types/index';
 
 import { url, request, submitForm, xhr_request, xhr_submitForm } from '../../util/index';
