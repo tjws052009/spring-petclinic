@@ -23,9 +23,12 @@ interface IVisitsPageState {
 }
 
 export default class VisitsPage extends React.Component<IVisitsPageProps, IVisitsPageState> {
+  [x: string]: any;
 
  initial_render: boolean;
  context: IRouterContext;
+ props: { params: any; };
+ state: any;
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired

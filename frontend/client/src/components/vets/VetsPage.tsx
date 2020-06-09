@@ -8,6 +8,7 @@ interface IVetsPageState {
 }
 
 export default class VetsPage extends React.Component<any, IVetsPageState> {
+  [x: string]: any;
 
   initial_render: boolean;
   state: { vets: IVet[]; };

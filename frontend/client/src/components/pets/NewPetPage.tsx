@@ -30,9 +30,12 @@ const NEW_PET: IEditablePet = {
 };
 
 export default class NewPetPage extends React.Component<INewPetPageProps, INewPetPageState> {
+  [x: string]: any;
 
 
   initial_render: boolean;
+  props: {params: any};
+  state: any;
 
   constructor(props: INewPetPageProps, state: INewPetPageState) {
     super(props, state);

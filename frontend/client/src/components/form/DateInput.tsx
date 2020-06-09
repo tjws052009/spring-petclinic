@@ -1,4 +1,4 @@
-/// <reference path="../../react-datepicker.d.ts" />
+// /// <reference path="../../react-datepicker.d.ts" />
 
 import * as React from 'react';
 
