@@ -4,7 +4,6 @@
     "enzyme": "registry:dt/enzyme#2.5.1+20161019142319",
     "jest": "registry:dt/jest#15.1.1+20160919141445",
     "node": "registry:dt/node#7.0.0+20170322231424",
-    "react": "registry:dt/react#0.14.0+20161008064207",
     "react-datepicker": "registry:dt/react-datepicker#0.40.0+20170310232735",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
     "react-router/history": "registry:dt/react-router/history#2.0.0+20160830150755",
