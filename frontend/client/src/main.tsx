@@ -1,4 +1,3 @@
-// React and Hot Loader
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -6,7 +5,7 @@ import { init as initApm } from '@elastic/apm-rum';
 
 import { browserHistory as history } from 'react-router';
 
-require('./styles/less/petclinic.less');
+import './styles/less/petclinic.less';
 import { url } from './util/index';
 
 export class APMService {
@@ -196,9 +195,9 @@ ReactDOM.render(
 );
 
 declare var module: any;
+// import Root as NextApp from './Root';
 if (module.hot) {
-  module.hot.accept('./Root', () => {
-    const NextApp = require('./Root').default;
+  module.hot.accept('./Root', (NextApp) => {
     ReactDOM.render(
       <AppContainer>
         <NextApp history={history} />

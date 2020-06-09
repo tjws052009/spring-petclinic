@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-const ReactDatePicker = require('react-datepicker');
+import { ReactDatePicker } from 'react-datepicker';
 import * as moment from 'moment';
 
 import { IError, IInputChangeHandler } from '../../types/index';
