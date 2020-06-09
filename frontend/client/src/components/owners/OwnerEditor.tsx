@@ -29,10 +29,11 @@ export default class OwnerEditor extends React.Component<IOwnerEditorProps, IOwn
   initial_render: boolean;
   last_used_zip: string;
 
+  state: { owner: any; states: { value: string; name: string; }[]; cities: { value: string; name: string; }[]; addresses: any[]; loading?: boolean; error?: IError };
+
   static contextTypes = {
     router: React.PropTypes.object.isRequired
   };
-  state: { owner: any; states: { value: string; name: string; }[]; cities: { value: string; name: string; }[]; addresses: any[]; loading?: boolean; error?: IError };
 
   constructor(props) {
     super(props);
@@ -49,6 +50,7 @@ export default class OwnerEditor extends React.Component<IOwnerEditorProps, IOwn
     this.onAddressChange = this.onAddressChange.bind(this);
     this.onAddressFetch = this.onAddressFetch.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+
     this.state = {
       owner: Object.assign({}, props.initialOwner),
       states: [{'value': '', 'name': ''}],
@@ -256,6 +258,8 @@ export default class OwnerEditor extends React.Component<IOwnerEditorProps, IOwn
     });
   }
 
+  // Temporary removed autocomplete for address
+  // <AutocompleteInput value={owner.address} label='Address' name='address' onFetch={this.onAddressFetch} onChange={this.onAddressChange} disabled={loading} />
   render() {
     const { owner, error, states, cities, addresses, loading } = this.state;
     return (
@@ -269,7 +273,6 @@ export default class OwnerEditor extends React.Component<IOwnerEditorProps, IOwn
               <Input object={owner} error={error} constraint={NotEmpty} label='Zip Code' name='zipCode' onChange={this.onInputChange} onBlur={this.onZipChange} disabled={loading} />
               <SelectInput object={owner} error={error} size={1} label='State' name='state' options={states} onChange={this.onStateChange} disabled={loading || states.length === 1} />
               <SelectInput object={owner} error={error} size={1} label='City' name='city' options={cities} onChange={this.onCityChange} disabled={loading || cities.length === 1}/>
-              <AutocompleteInput value={owner.address} label='Address' name='address' onFetch={this.onAddressFetch} onChange={this.onAddressChange} disabled={loading} />
               <Input object={owner} error={error} constraint={Digits(10)} label='Telephone' name='telephone' onChange={this.onInputChange} disabled={loading} />
             </div>
             <div className='form-group'>
