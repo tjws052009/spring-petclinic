@@ -16,6 +16,7 @@ interface IPetEditorProps {
 interface IPetEditorState {
   editablePet?: IEditablePet;
   error?: IError;
+  loading: boolean;
 };
 
 export default class PetEditor extends React.Component<IPetEditorProps, IPetEditorState> {
@@ -27,13 +28,16 @@ export default class PetEditor extends React.Component<IPetEditorProps, IPetEdit
     router: React.PropTypes.object.isRequired
   };
 
+  state: { editablePet: any; loading?: boolean; error?: IError };
+  props: { owner: any; pettypes: any; };
+
 
   constructor(props) {
     super(props);
     punish();
     this.onInputChange = this.onInputChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.state = { editablePet: Object.assign({}, props.pet ) };
+    this.state = { editablePet: Object.assign({}, props.pet ), loading: false };
   }
 
   onSubmit(event) {
@@ -92,7 +96,7 @@ export default class PetEditor extends React.Component<IPetEditorProps, IPetEdit
 
   render() {
     const { owner, pettypes } = this.props;
-    const { editablePet, error } = this.state;
+    const { editablePet, loading, error } = this.state;
     const formLabel = editablePet.isNew ? 'Add Pet' : 'Update Pet';
 
     return (
@@ -107,7 +111,7 @@ export default class PetEditor extends React.Component<IPetEditorProps, IPetEdit
 
             <Input object={editablePet} error={error} label='Name' name='name' onChange={this.onInputChange} />
             <DateInput object={editablePet} error={error} label='Birth date' name='birthDate' onChange={this.onInputChange} />
-            <SelectInput object={editablePet} error={error} size={5} label='Type' name='type_id' options={pettypes} onChange={this.onInputChange} />
+            <SelectInput object={editablePet} error={error} size={5} label='Type' name='type_id' options={pettypes} onChange={this.onInputChange} disabled={loading} />
           </div>
           <div className='form-group'>
             <div className='col-sm-offset-2 col-sm-10'>
