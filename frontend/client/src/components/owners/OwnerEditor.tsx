@@ -273,6 +273,7 @@ export default class OwnerEditor extends React.Component<IOwnerEditorProps, IOwn
               <Input object={owner} error={error} constraint={NotEmpty} label='Zip Code' name='zipCode' onChange={this.onInputChange} onBlur={this.onZipChange} disabled={loading} />
               <SelectInput object={owner} error={error} size={1} label='State' name='state' options={states} onChange={this.onStateChange} disabled={loading || states.length === 1} />
               <SelectInput object={owner} error={error} size={1} label='City' name='city' options={cities} onChange={this.onCityChange} disabled={loading || cities.length === 1}/>
+              <AutocompleteInput value={owner.address} label='Address' name='address' onFetch={this.onAddressFetch} onChange={this.onAddressChange} disabled={loading} />
               <Input object={owner} error={error} constraint={Digits(10)} label='Telephone' name='telephone' onChange={this.onInputChange} disabled={loading} />
             </div>
             <div className='form-group'>

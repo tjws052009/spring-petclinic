@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Autosuggest } from 'react-autosuggest';
+import * as Autosuggest from 'react-autosuggest';
 import { url } from '../../util/index';
 import { IConstraint, IError, IInputFetchHandler, IInputValueHandler } from '../../types/index';
 
@@ -24,13 +24,15 @@ interface IAutocompleteState {
 };
 
 export default class AutocompleteInput extends React.Component<IAutocompleteProps, IAutocompleteState> {
-  [x: string]: any;
+  setState(arg0: { suggestions: any; }) {
+    throw new Error('Method not implemented.');
+  }
   state: { suggestions: any[]; };
   props: any;
 
-  constructor(props) {
+  constructor(props: IAutocompleteProps) {
     super(props);
-    this.state = {
+    const newLocal = this.state = {
       suggestions: []
     };
   }
