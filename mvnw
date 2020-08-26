@@ -227,7 +227,7 @@ export MAVEN_CMD_LINE_ARGS
 WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain
 
 exec "$JAVACMD" \
-	-javaagent:./agents/elastic-apm-agent-1.6.0.jar \
+	-javaagent:./agents/elastic-apm-agent-1.18.0.RC1.jar \
   -Delastic.apm.application_packages=org.springframework.samples.petclinic\
   -Delastic.apm.service_name=spring-petclinic \
   -Delastic.apm.service_version=1.0.0 \
