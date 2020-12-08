@@ -3,17 +3,16 @@
 #Build application stage
 #We need maven.
 FROM maven:3.5.3-jdk-10
-ARG JAVA_AGENT_BRANCH=master
+ARG JAVA_AGENT_BRANCH=1.x
 ARG JAVA_AGENT_REPO=elastic/apm-agent-java
 
-WORKDIR /usr/src/java-app
-
+WORKDIR /usr/src/java-code
 #build the application
-ADD . /usr/src/java-code/spring-petclinic
+RUN git clone https://github.com/elastic/spring-petclinic.git
 WORKDIR /usr/src/java-code/spring-petclinic
-
 RUN mvn -q -B package -DskipTests
 
+RUN mkdir /usr/src/java-app
 RUN cp -v /usr/src/java-code/spring-petclinic/target/*.jar /usr/src/java-app/app.jar
 
 #build the agent
@@ -21,6 +20,7 @@ WORKDIR /usr/src/java-agent-code
 RUN curl -L https://github.com/$JAVA_AGENT_REPO/archive/$JAVA_AGENT_BRANCH.tar.gz | tar --strip-components=1 -xz
 
 RUN mvn -q -B package -DskipTests
+
 
 RUN export JAVA_AGENT_BUILT_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec) \
     && cp -v /usr/src/java-agent-code/elastic-apm-agent/target/elastic-apm-agent-${JAVA_AGENT_BUILT_VERSION}.jar /usr/src/java-app/elastic-apm-agent.jar
