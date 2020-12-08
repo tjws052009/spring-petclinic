@@ -28,7 +28,7 @@ First of all, set your Elasticsearch cluster information inside the script `bin/
 - Start the Spring Boot backend
 
 ```
-	git clone https://github.com/adamquan/spring-petclinic.git
+	git clone https://github.com/tuurleyck/spring-petclinic.git
 	cd spring-petclinic
 	./mvnw spring-boot:run
 ```
@@ -63,4 +63,4 @@ First of all, set your Elasticsearch cluster information inside the script `bin/
 <a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
 
 Application Architecture: 
-![PetClinic Application Architecture](https://github.com/adamquan/spring-petclinic/blob/master/images/architecture.png)
+![PetClinic Application Architecture](https://github.com/tuurleyck/spring-petclinic/blob/master/images/architecture.png)
