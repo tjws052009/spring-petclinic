@@ -118,8 +118,10 @@ export class APMService {
   startSpan(name, type) {
     if (APMService.instance.ready && APMService.instance.open) {
       let transaction = APMService.instance.apm.getCurrentTransaction();
-      APMService.instance.span_open = true;
-      APMService.instance.current_span = transaction.startSpan(name, type);
+      if (transaction) {
+        APMService.instance.span_open = true;
+        APMService.instance.current_span = transaction.startSpan(name, type);
+      }
     }
   }
 
