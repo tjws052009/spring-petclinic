@@ -1,4 +1,4 @@
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
 # This is your APM server URL
 export ELASTIC_APM_SERVER_URL=
@@ -14,4 +14,4 @@ export ELASTICSEARCH_URL=
 export ELASTICSEARCH_PASSWORD=
 
 # This is your Elasticsearch JAVA APM Version
-export ELASTIC_APM_AGENT_VERSION=1.19.0
+export ELASTIC_APM_AGENT_VERSION=1.29.0

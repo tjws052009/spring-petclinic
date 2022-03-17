@@ -16,7 +16,7 @@
   "author": "Nils Hartmann",
   "license": "ISC",
   "dependencies": {
-    "@elastic/apm-rum": "^5.2.0",
+    "@elastic/apm-rum": "^5.10.2",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.6",
     "moment": "^2.22.2",

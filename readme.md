@@ -1,13 +1,13 @@
 # Spring PetClinic Application with the Elastic Stack
 
-The PetClinic application contains a few componets (See architecture diagram at the bottom for detais):
+The PetClinic application contains a few components (See architecture diagram at the bottom for details):
 
 - The React frontend web application
-- The node.js Express application acting as a proxy for the React web application.
+- The Node.js Express application acting as a proxy for the React web application.
 - The Spring Boot backend application.
 - The Python application for address lookup from an Elasticsearch cluster.
 
-A docker compose allows the user to run the application, backed with Mysql as the data layer, with Elastic APM and Beat instrumentation enabled. The following services are deployed:
+A Docker Compose allows the user to run the application, backed with MySQL as the data layer, with Elastic APM and Beat instrumentation enabled. The following services are deployed:
 
 - Pet Clinic via embedded Tomcat with REST API. Instrument with Elastic Java Agent.
 - React UI for Pet Clinic using above. Instrument with Elastic RUM Agent.
@@ -17,7 +17,7 @@ A docker compose allows the user to run the application, backed with Mysql as th
 
 ## Running Petclinic with the Elastic Stack
 
-`ES_VERSION=6.4.2 docker-compose -f docker-compose.yml up`
+`ES_VERSION=8.1.0 docker-compose -f docker-compose.yml up`
 
 ## Running petclinic locally for development
 
@@ -37,9 +37,9 @@ First of all, set your Elasticsearch cluster information inside the script `bin/
 
 ```
 	cd spring-petclinic/address_resolver/src
-	pip install gunicorn json-logging-py
-	pip install --no-cache-dir -r requirements.txt
-        python data_load.py
+	pip3 install gunicorn json-logging-py
+	pip3 install --no-cache-dir -r requirements.txt
+  python3 data_load.py
 	gunicorn --config gunicorn.conf --log-config logging.conf -b :5000 server:app
 ```
 
@@ -63,4 +63,4 @@ First of all, set your Elasticsearch cluster information inside the script `bin/
 <a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
 
 Application Architecture: 
-![PetClinic Application Architecture](https://github.com/tuurleyck/spring-petclinic/blob/master/images/architecture.png)
+![PetClinic Application Architecture](https://github.com/EvelienSchellekens/spring-petclinic/blob/master/images/architecture.png)
