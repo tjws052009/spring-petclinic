@@ -30,7 +30,7 @@ def handle_data_file(file_path, index):
 
 if __name__ == '__main__':
     args = parser.parse_args()
-    es = Elasticsearch(hosts=[args.es_host], http_auth=(args.es_user, args.es_password), use_ssl=args.use_ssl, verify_certs=True, timeout=args.timeout)
+    es = Elasticsearch(hosts=[args.es_host], http_auth=(args.es_user, args.es_password), verify_certs=True, timeout=args.timeout)
     start = time.time()
     if (not es.indices.exists(index=args.index)):
         es.indices.create(index=args.index, body = json.loads(open('mapping.json').read()))
