@@ -1,1 +1,1 @@
-docker run -it -p 3022:3000 -v "/home/ubuntu/spring-petclinic:/home/project:cached" elswork/theia:1.0.1
+sudo docker run -d -it -p 3022:3000 -v "/home/ubuntu/spring-petclinic:/home/project:cached" elswork/theia:1.0.1
