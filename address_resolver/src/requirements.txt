@@ -8,7 +8,7 @@ itsdangerous==1.1.0
 Jinja2==2.10
 MarkupSafe==1.1.1
 pystache==0.5.4
-python-json-logger==0.2
+python-json-logger==2.0.2
 urllib3==1.26.9
 Werkzeug==0.14.1
 charset-normalizer==2.0.12
