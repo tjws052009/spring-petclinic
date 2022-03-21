@@ -49,7 +49,7 @@ async function safe_run() {
             console.log("failed for url")
         console.log(error);
     });
-        await sleep(6000 + Math.floor(Math.random()*10000));
+        await sleep(1000 + Math.floor(Math.random()*1000));
     }
 }
 
