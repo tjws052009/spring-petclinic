@@ -63,4 +63,4 @@ First of all, set your Elasticsearch cluster information inside the script `bin/
 <a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
 
 Application Architecture: 
-![PetClinic Application Architecture](https://github.com/EvelienSchellekens/spring-petclinic/blob/master/images/architecture.png)
+![PetClinic Application Architecture](images/architecture.png)
