@@ -37,6 +37,10 @@ export default class ErrorPage extends React.Component<any, IErrorPageState> {
   }
 
   render() {
+
+    if (!(this.state && this.state.error)) {
+      return null;
+    }
     const { error } = this.state;
 
     return <span>
