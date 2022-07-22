@@ -1,8 +1,6 @@
-import csv
-import json, os, sys, argparse, time
+import csv, json, os, sys, argparse, time, re
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import parallel_bulk
-import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--file', dest='file', required=False, default='../sample.csv')
@@ -29,7 +27,11 @@ def handle_data_file(file_path, index):
 
 if __name__ == '__main__':
     args = parser.parse_args()
-    es = Elasticsearch(hosts=[args.es_host], http_auth=(args.es_user, args.es_password), verify_certs=True, timeout=args.timeout)
+    # Add port 443 if no port is defined
+    p = '(?:http.*://)?(?P<host>[^:/ ]+).?(?P<port>[0-9]*).*'
+    m = re.search(p,args.es_host)
+    es_host = args.es_host + ':443' if (m.group('port') == '') else args.es_host
+    es = Elasticsearch(hosts=[es_host], http_auth=(args.es_user, args.es_password), verify_certs=True, timeout=args.timeout)
     start = time.time()
     if (not es.indices.exists(index=args.index)):
         es.indices.create(index=args.index, body = json.loads(open('mapping.json').read()))
