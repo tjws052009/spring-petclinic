@@ -1,12 +1,9 @@
-const { Chromeless } = require('chromeless')
+const puppeteer = require('puppeteer')
 
 var baseUrl = process.env.PETCLINIC_BASE_URL || 'http://www.opbeans.com';
 var url = baseUrl
 var NUM_IPS = 1000;
 var RANDOM_IPS = loadRandomIPs();
-
-const chromeless = new Chromeless({ launchChrome: true,  waitTimeout: 30000 });
-
 
 function sleep(ms){
     return new Promise(resolve=>{
@@ -15,12 +12,11 @@ function sleep(ms){
 }
 
 async function run() {
-    url = await chromeless
-        .goto(url)
-        .setExtraHTTPHeaders({
-            'X-Forwarded-For': selectRandomIP()
-        })
-        .evaluate((baseUrl, url) => {
+    const browser = await puppeteer.launch({headless: 'new'});
+    const page = await browser.newPage();
+    await page.setExtraHTTPHeaders({'X-Forwarded-For': selectRandomIP()});
+    await page.goto(url);
+    url = await page.evaluate((baseUrl, url) => {
             var links = document.querySelectorAll('a[href^="/"]');
             var uniq_links = {};
             for ( var i=0, len=links.length; i < len; i++ ) {
