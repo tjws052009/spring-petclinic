@@ -35,6 +35,7 @@ async function run() {
                 return baseUrl;
             }
         }, baseUrl, url);
+    await browser.close();
     console.log(url);
 }
 
