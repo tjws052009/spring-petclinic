@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
 
 # Add Chrome as a user
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
-    && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome && RUN chmod 777 /home/chrome
+    && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome && chmod 777 /home/chrome
 
 WORKDIR /home/chrome
 
