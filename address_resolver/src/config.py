@@ -5,7 +5,7 @@ class Config(object):
     # Elasticsearch information. This is the cluster used to store address data.
     # Replace the URL, user and password information with these of your cluster.
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL','localhost:9200')
-    ELASTICSEARCH_USER = os.getenv('ELASTICSEARCH_USER','elastic')
+    ELASTICSEARCH_USERNAME = os.getenv('ELASTICSEARCH_USERNAME','elastic')
     ELASTICSEARCH_PASSWORD = os.getenv('ELASTICSEARCH_PASSWORD', 'changeme')
 
     ELASTICSEARCH_VALIDATE_CERTS = os.getenv('ELASTICSEARCH_VALIDATE_CERTS', 'true')
